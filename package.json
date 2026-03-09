@@ -1,6 +1,6 @@
 {
   "name": "from-async",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Convert async iterables, iterators, or array-like objects into arrays.",
   "keywords": [],
   "license": "MIT",
