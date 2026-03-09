@@ -1,0 +1,2 @@
+patchedDependencies:
+  '@semantic-release/changelog': patches/@semantic-release__changelog.patch

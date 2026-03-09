@@ -1,0 +1,16 @@
+diff --git a/lib/prepare.js b/lib/prepare.js
+index 7ce101a346b73303abb12a8af678364aac24119b..093bbaa35f528b0cd1bf4cfb916b9b4fef887965 100644
+--- a/lib/prepare.js
++++ b/lib/prepare.js
+@@ -16,6 +16,11 @@ module.exports = async (pluginConfig, {cwd, nextRelease: {notes}, logger}) => {
+       logger.log('Create %s', changelogPath);
+     }
+ 
++    notes = notes.trim();
++    notes = notes.replace(/^# (\[?\d+\.\d+\.\d+)/, (match, p1) => `## ${p1}`);
++    notes = notes.replace(/\n{3}/g, '\n\n');
++    notes = notes.replace(/^\* /gm, '- ');
++
+     const currentContent =
+       changelogTitle && currentFile.startsWith(changelogTitle)
+         ? currentFile.slice(changelogTitle.length).trim()
