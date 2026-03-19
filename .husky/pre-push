@@ -1,1 +1,1 @@
-# npm test --if-present
+npm run validate --if-present

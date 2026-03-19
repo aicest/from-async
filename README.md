@@ -3,7 +3,9 @@
 [![NPM Version](https://img.shields.io/npm/v/from-async)](https://www.npmjs.com/package/from-async)
 [![Codecov](https://img.shields.io/codecov/c/github/aicest/from-async?token=GQC7YN4VN2)](https://app.codecov.io/github/aicest/from-async)
 
-A minimal alternative to [`Array.fromAsync`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array/fromAsync) for converting async iterables, sync iterables, or array-like objects to arrays. Prefer the native `Array.fromAsync` if available.
+A minimal ponyfill for [`Array.fromAsync`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array/fromAsync).
+It converts async iterables, sync iterables, and array-like objects into arrays.
+Prefer the native `Array.fromAsync` when available.
 
 ## Install
 
@@ -33,10 +35,31 @@ console.log(array) // ['a', 'b', 'c']
 
 ## API
 
-### `function fromAsync<T>(input: AsyncIterable<T> | Iterable<T> | ArrayLike<T>): Promise<T[]>`
+### `fromAsync(iterable)`
 
-- Accepts: Any async iterable, sync iterable, or array-like object.
-- Returns: A promise that resolves to an array containing all items from the input, in order.
+```ts
+function fromAsync<T>(
+  iterable: AsyncIterable<T> | Iterable<T> | ArrayLike<T>
+): Promise<Awaited<T>[]>
+```
+
+- `iterable`: An async iterable, sync iterable, or array-like object.
+- Returns: A promise that resolves to an array of values, preserving input order.
+
+### `fromAsync(iterable, project, thisArg?)`
+
+```ts
+function fromAsync<T, U>(
+  iterable: AsyncIterable<T> | Iterable<T> | ArrayLike<T>,
+  project: (value: Awaited<T>, index: number) => U,
+  thisArg?: unknown
+): Promise<Awaited<U>[]>
+```
+
+- `iterable`: An async iterable, sync iterable, or array-like object.
+- `project`: Called as `project(value, index)` for each item.
+- `thisArg`: Optional `this` value used when calling `project`.
+- Returns: A promise that resolves to an array of mapped values, preserving input order.
 
 ## License
 
