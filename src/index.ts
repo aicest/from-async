@@ -1,3 +1,5 @@
+/// <reference lib="esnext.array" />
+
 export function fromAsync<T>(
   iterable: AsyncIterable<T> | Iterable<T> | ArrayLike<T>
 ): Promise<Awaited<T>[]>
