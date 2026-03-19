@@ -1,6 +1,6 @@
 {
   "name": "from-async",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Convert async iterables, iterators, or array-like objects into arrays.",
   "keywords": [],
   "repository": "aicest/from-async",
